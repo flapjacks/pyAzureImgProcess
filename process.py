@@ -24,7 +24,7 @@ def upload_original_image(f, name, maxwidth, maxheight, blob_service, container_
 	return True
 
 # create square thumbnail image centered in middle of image, resize to thumb_width by thumb_height
-def create_thumbnail(f, thumb_name, thumb_width, thumb_height, blob_service, container_name):
+def create_thumbnail(f, thumb_name, thumb_size, blob_service, container_name):
 
 	im = Image.open(f)
 	width = im.size[0]
@@ -39,7 +39,7 @@ def create_thumbnail(f, thumb_name, thumb_width, thumb_height, blob_service, con
 		lower_crop = int((height + width)//2)
 		cropped = im.crop((0, upper_crop, width, lower_crop))
 
-	std_size = thumb_width, thumb_height
+	std_size = thumb_size, thumb_size
 	cropped.thumbnail(std_size, Image.ANTIALIAS)
 	# create buffer
 	buf = StringIO.StringIO()
